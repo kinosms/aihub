@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 
 
@@ -10,6 +10,26 @@ import { motion } from 'framer-motion'
 export default function AIHubLandingPage() {
   const [loading, setLoading] = useState(false)
   const [showSummary, setShowSummary] = useState(false)
+  const questions = [
+
+  '당신이 어떤 사람인지 궁금해요',
+
+  '하루 중 가장 몰입되는 순간은 언제인가요?',
+
+  '요즘 가장 자주 찾게 되는 건 무엇인가요?',
+
+  '혼자 있는 시간이 더 편한가요,\n사람들과 어울리는 시간이 더 즐거운가요?'
+
+]
+  const [step, setStep] = useState(0)
+  const [input, setInput] = useState('')
+  const chatRef = useRef<HTMLDivElement>(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [messages, setMessages] = useState<any[]>([])
+  const [currentQuestion, setCurrentQuestion] = useState(questions[0])
+  const [showCenterQuestion, setShowCenterQuestion] = useState(true)
+  const [completed, setCompleted] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
   const handleSummary = () => {
 
     setLoading(true)
@@ -23,6 +43,96 @@ export default function AIHubLandingPage() {
     }, 2200)
 
   }
+const handleSubmit = () => {
+
+  // 중복 입력 방지
+  if (submitting) return
+
+  const currentInput = input.trim()
+
+  // 빈 입력 방지
+  if (!currentInput) return
+
+  setSubmitting(true)
+
+  // 현재 질문 + 사용자 답변 저장
+  setMessages(prev => [
+    ...prev,
+    {
+      type: 'question',
+      text: currentQuestion
+    },
+    {
+      type: 'answer',
+      text: currentInput
+    }
+  ])
+
+  // 입력창 초기화
+  setInput('')
+
+  // 다음 질문 이동
+  if (step < questions.length - 1) {
+
+    setTimeout(() => {
+
+      setCurrentQuestion(
+        questions[step + 1]
+      )
+
+      setStep(prev => prev + 1)
+
+      setSubmitting(false)
+
+    }, 500)
+
+  } else {
+
+    setTimeout(() => {
+
+  setCompleted(true)
+
+  setSubmitting(false)
+
+}, 700)
+
+// 완료 메시지 충분히 보여준 뒤 이동
+
+setTimeout(() => {
+
+  document
+
+    .getElementById('persona-section')
+
+    ?.scrollIntoView({
+
+      behavior: 'smooth'
+
+    })
+
+}, 2200)
+
+// 초기화
+
+setTimeout(() => {
+
+  setMessages([])
+
+  setStep(0)
+
+  setCurrentQuestion(questions[0])
+
+  setCompleted(false)
+
+  setInput('')
+
+}, 4200)
+
+  }
+
+}
+
+
   const personaCards = [
     {
       title: '학생을 위한 AI',
@@ -68,6 +178,60 @@ export default function AIHubLandingPage() {
     return () => window.removeEventListener('scroll', handleScroll)
 
   }, [])
+
+
+useEffect(() => {
+
+  if (chatRef.current) {
+
+    chatRef.current.scrollTo({
+
+      top: chatRef.current.scrollHeight,
+
+      behavior: 'smooth'
+
+    })
+
+  }
+
+}, [messages])
+
+
+
+useEffect(() => {
+
+  window.scrollTo(0, 0)
+
+}, [])
+
+useEffect(() => {
+
+  const handleScroll = () => {
+
+    setShowHeader(window.scrollY > 80)
+
+  }
+
+  window.addEventListener('scroll', handleScroll)
+
+  return () => window.removeEventListener('scroll', handleScroll)
+
+}, [])
+
+
+
+
+  useEffect(() => {
+
+  // 첫 진입시엔 포커스 금지
+
+  if(step === 0 && messages.length === 0) return
+
+  inputRef.current?.focus()
+
+}, [step, messages])
+
+
 
   return (
     <div className="w-full min-h-screen bg-white text-zinc-900">
@@ -125,7 +289,7 @@ export default function AIHubLandingPage() {
       </header>
 
       {/* Hero Section */}
-      {/* Hero Section */}
+
 <section className="relative h-screen overflow-hidden">
 
   {/* Full Visual Area */}
@@ -208,8 +372,20 @@ export default function AIHubLandingPage() {
 
         <div className="flex flex-wrap gap-4">
 
-          <button className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition">
-            AI 체험하기
+          <button onClick={() => {
+
+            document
+
+              .getElementById('persona-finder')
+
+              ?.scrollIntoView({
+
+                behavior: 'smooth'
+
+              })
+
+}}className="px-7 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-[1.02] transition">
+            페르소나 발견하기
           </button>
 
           <button className="px-7 py-4 rounded-2xl border border-white/20 bg-white/10 backdrop-blur text-white font-semibold hover:bg-white/20 transition">
@@ -224,20 +400,402 @@ export default function AIHubLandingPage() {
 
 </section>
 
+
+
+
+
+
+
+
+
+<section
+  id="persona-finder"
+  className="
+    relative
+    h-screen
+    bg-white
+    overflow-hidden
+  "
+>
+
+  {/* BACKGROUND */}
+  <div className="absolute inset-0 overflow-hidden">
+
+    <div
+      className="
+        absolute
+        top-[-200px]
+        left-[-100px]
+        w-[500px]
+        h-[500px]
+        rounded-full
+        bg-violet-100
+        blur-[120px]
+        opacity-70
+      "
+    />
+
+    <div
+      className="
+        absolute
+        bottom-[-200px]
+        right-[-100px]
+        w-[500px]
+        h-[500px]
+        rounded-full
+        bg-fuchsia-100
+        blur-[120px]
+        opacity-70
+      "
+    />
+
+  </div>
+
+  {/* HEADER */}
+  <div className="absolute top-[90px] left-1/2 -translate-x-1/2 z-20 text-center">
+
+    <div className="text-sm font-bold tracking-[0.22em] text-violet-500 mb-5">
+      PERSONA FINDER
+    </div>
+
+    <h2 className="text-[54px] font-black tracking-tight text-zinc-900 leading-tight mb-5">
+      당신에게 어울리는
+      <br />
+      AI 경험을 찾아보세요
+    </h2>
+
+    <p className="text-zinc-500 text-lg leading-relaxed">
+      카나나와 짧은 대화를 나누며
+      당신의 취향과 성향을 발견해보세요
+    </p>
+
+  </div>
+
+  {/* RIGHT CHAT HISTORY */}
+  <div
+    ref={chatRef}
+    className="
+      absolute
+      right-[70px]
+      top-[240px]
+      w-[360px]
+      h-[48vh]
+      overflow-y-auto
+      opacity-45
+      pr-2
+      z-0
+      scrollbar-hide
+    "
+  >
+
+    <div className="space-y-5">
+
+      {messages
+
+
+      .map((msg, index) => (
+
+        <motion.div
+          key={index}
+          initial={{
+            opacity: 0,
+            x: msg.type === 'question' ? -20 : 20,
+            y: 10
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            y: 0
+          }}
+          transition={{
+            duration: 0.45
+          }}
+          className={`
+            flex
+            ${msg.type === 'question'
+              ? 'justify-start'
+              : 'justify-end'}
+          `}
+        >
+
+          <div
+            className={`
+              max-w-[85%]
+              rounded-[24px]
+              px-5
+              py-4
+              text-[15px]
+              leading-[1.7]
+              whitespace-pre-line
+              shadow-sm
+              backdrop-blur
+              ${msg.type === 'question'
+                ? 'bg-white border border-zinc-200 text-zinc-900'
+                : 'bg-violet-600 text-white'}
+            `}
+          >
+
+            {msg.type === 'question' && (
+
+              <div className="text-[11px] font-bold text-violet-500 mb-2 tracking-[0.14em]">
+                KANANA
+              </div>
+
+            )}
+
+            {msg.text}
+
+          </div>
+
+        </motion.div>
+
+      ))}
+
+    </div>
+
+  </div>
+
+  {/* CENTER QUESTION */}
+  <div
+    className="
+      absolute
+      left-1/2
+      top-1/2
+      -translate-x-1/2
+      -translate-y-1/2
+      w-full
+      px-10
+      z-20
+      pointer-events-none
+    "
+  >
+
+    <AnimatePresence mode="wait">
+
+      {!completed && showCenterQuestion && (
+
+        <motion.div
+          key={currentQuestion}
+          initial={{
+            opacity: 0,
+            y: 50,
+            scale: 0.96
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            scale: 1
+          }}
+          exit={{
+            opacity: 0,
+            y: -50,
+            scale: 0.96
+          }}
+          transition={{
+            duration: 0.55
+          }}
+          className="
+            text-center
+            whitespace-pre-line
+          "
+        >
+
+          <div
+            className="
+              text-[68px]
+              font-black
+              leading-[1.14]
+              tracking-tight
+              text-zinc-900
+            "
+          >
+            {currentQuestion}
+          </div>
+
+        </motion.div>
+
+      )}
+
+      {completed && (
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.96
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1
+          }}
+          transition={{
+            duration: 0.6
+          }}
+          className="text-center"
+        >
+
+          <div
+            className="
+              text-[72px]
+              font-black
+              tracking-tight
+              text-zinc-900
+              mb-6
+            "
+          >
+            당신의 페르소나를 찾았어요
+          </div>
+
+          <div className="text-zinc-500 text-2xl leading-relaxed">
+            카나나가 당신에게 어울리는
+            <br />
+            AI 경험을 준비했어요
+          </div>
+
+        </motion.div>
+
+      )}
+
+    </AnimatePresence>
+
+  </div>
+
+  {/* INPUT */}
+  {!completed && (
+
+    <div
+      className="
+        absolute
+        bottom-[42px]
+        left-1/2
+        -translate-x-1/2
+        w-[760px]
+        z-30
+      "
+    >
+
+      <div
+        className="
+          flex
+          items-center
+          gap-4
+          rounded-full
+          border
+          border-zinc-200
+          bg-white/90
+          backdrop-blur-xl
+          px-7
+          py-5
+          shadow-[0_25px_80px_rgba(0,0,0,0.08)]
+        "
+      >
+
+        <input
+          ref={inputRef}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+
+  // 한글 조합 중이면 무시
+
+  if (e.nativeEvent.isComposing) return
+
+  if (e.key === 'Enter') {
+
+    e.preventDefault()
+
+    handleSubmit()
+
+  }
+
+}}
+          placeholder="당신의 이야기를 들려주세요"
+          className="
+            flex-1
+            bg-transparent
+            outline-none
+            text-[18px]
+            text-zinc-900
+            placeholder:text-zinc-400
+          "
+        />
+
+        <button
+          onClick={handleSubmit}
+          className="
+            px-6
+            py-3
+            rounded-full
+            bg-gradient-to-r
+            from-violet-600
+            to-fuchsia-500
+            text-white
+            font-semibold
+            hover:scale-[1.03]
+            transition
+          "
+        >
+          입력
+        </button>
+
+      </div>
+
+    </div>
+
+  )}
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       {/* Persona Cards */}
-      <section className="max-w-7xl mx-auto px-6 py-28">
-        <div className="flex items-end justify-between mb-12">
+     <section
+
+        id="persona-section"
+
+        className="max-w-7xl mx-auto px-6 py-21"
+
+      >
+        <div className="flex items-end justify-between">
           <div>
             <div className="text-sm font-semibold text-violet-600 mb-3">
               AI by Persona
             </div>
 
             <h2 className="text-4xl font-black tracking-tight mb-4">
-              나에게 맞는 AI 서비스
+              나에게 맞는 카나나 서비스
             </h2>
 
             <p className="text-zinc-600 text-lg">
-              상황과 목적에 따라 다양한 AI를 선택해보세요.
+              상황과 목적에 따라 다양한 카나나 서비스를 선택해보세요.
             </p>
           </div>
         </div>
@@ -257,12 +815,41 @@ export default function AIHubLandingPage() {
         ">
 
           {/* STUDENT PERSONA */}
-          <div className="
-            relative
-            min-w-[980px]
-            h-[760px]
-            flex-shrink-0
-          ">
+          <div
+
+  onClick={() => {
+
+    document
+
+      .getElementById('scenario-section')
+
+      ?.scrollIntoView({
+
+        behavior: 'smooth'
+
+      })
+
+  }}
+
+  className="
+
+    relative
+
+    min-w-[980px]
+
+    h-[720px]
+
+    flex-shrink-0
+
+    cursor-pointer
+
+    transition
+
+    hover:scale-[1.01]
+
+  "
+
+>
 
             {/* IMAGE */}
             <img
@@ -368,7 +955,7 @@ export default function AIHubLandingPage() {
 
               className="
                 absolute
-                top-[500px]
+                top-[300px]
                 left-[180px]
                 bg-cyan-50/90
                 backdrop-blur-xl
@@ -393,12 +980,12 @@ export default function AIHubLandingPage() {
             {/* TEXT */}
             <div className="
               absolute
-              left-10
-              bottom-10
+              left-4
+              bottom-8
               z-10
             ">
 
-              <div className="text-5xl font-black mb-3">
+              <div className="text-[45px] font-black mb-1">
                 학생을 위한 AI
               </div>
 
@@ -417,7 +1004,7 @@ export default function AIHubLandingPage() {
 
 
     {/* Service Curation Section */}
-    <section className="w-full bg-white py-20 overflow-hidden">
+    <section id="scenario-section" className="w-full bg-white py-20 overflow-hidden">
 
   {/* MAIN LAYOUT */}
   <div
@@ -533,7 +1120,7 @@ export default function AIHubLandingPage() {
           className="
             absolute
             top-[58px]
-            left-[165px]
+            left-[105px]
             w-[70px]
             border-t-2
             border-dashed
@@ -552,6 +1139,10 @@ export default function AIHubLandingPage() {
           overflow-hidden
           shadow-md
           mb-5
+          transition-all
+          duration-300
+          hover:scale-[1.3]
+          hover:shadow-[0_18px_50px_rgba(124,58,237,0.18)]
         "
       >
         <img
@@ -590,6 +1181,10 @@ export default function AIHubLandingPage() {
           p-5
           shadow-sm
           min-h-[180px]
+          transition-all
+          duration-300
+          hover:scale-[1.3]
+          hover:shadow-[0_20px_60px_rgba(124,58,237,0.12)]
         "
       >
 
@@ -973,15 +1568,15 @@ export default function AIHubLandingPage() {
         <div
           className="
 
-  flex
+          flex
 
-  gap-7
+          gap-7
 
-  w-max
+          w-max
 
-  [animation:marqueeRight_45s_linear_infinite]
+          [animation:marqueeRight_45s_linear_infinite]
 
-"
+        "
         >
 
           {[
@@ -1143,11 +1738,11 @@ export default function AIHubLandingPage() {
 
         <div
           className="
-  flex
-  gap-7
-  w-max
-  [animation:marqueeLeft_50s_linear_infinite]
-"
+          flex
+          gap-7
+          w-max
+          [animation:marqueeLeft_50s_linear_infinite]
+        "
         >
 
           {[

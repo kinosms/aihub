@@ -665,7 +665,7 @@ useEffect(() => {
     <div
       className="
         absolute
-        bottom-[42px]
+        bottom-[80px]
         left-1/2
         -translate-x-1/2
         w-[760px]
@@ -1265,6 +1265,20 @@ useEffect(() => {
   <div className="flex justify-center mt-12">
 
     <button
+
+      onClick={() => {
+
+      document
+
+        .getElementById('demo-section')
+
+        ?.scrollIntoView({
+
+          behavior: 'smooth'
+
+        })
+
+    }}
       className="
         group
         inline-flex
@@ -1311,6 +1325,7 @@ useEffect(() => {
  {/* Interactive Demo Section */}
  
 <section
+  id="demo-section"
   className="
     relative
     overflow-hidden
@@ -1353,7 +1368,7 @@ useEffect(() => {
   <div className="relative max-w-[1600px] mx-auto px-10">
 
     {/* HEADER */}
-    <div className="text-center mb-16">
+    <div className="text-center mb-10">
 
       <div className="text-sm font-semibold text-violet-400 mb-4">
         Interactive Demo
@@ -1371,7 +1386,7 @@ useEffect(() => {
     </div>
 
     {/* FLOW */}
-    <div className="flex items-center justify-center gap-14">
+    <div className="scale-[0.86] origin-top flex items-center justify-center gap-10">
 
       {/* INPUT */}
       <div
@@ -1406,7 +1421,7 @@ useEffect(() => {
             text-white
             font-semibold
             shadow-[0_25px_80px_rgba(139,92,246,0.45)]
-            hover:scale-[1.05]
+            hover:scale-[1.1]
             transition
           "
         >
@@ -1415,7 +1430,7 @@ useEffect(() => {
             AI Summary
           </div>
 
-          <div className="flex items-center gap-2 text-[18px]">
+          <div className="flex items-center gap-2 text-[20px]">
             대화 요약하기
 
             <span className="group-hover:translate-x-1 transition">

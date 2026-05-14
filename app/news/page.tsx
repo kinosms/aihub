@@ -3,7 +3,7 @@ import Footer from '../components/layout/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Kanana News',
+  title: 'Kanana Inside',
   description: '카나나의 최신 소식과 제품 이야기'
 }
 

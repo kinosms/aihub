@@ -52,7 +52,7 @@ export default function Header() {
             </Link>
             <button className="hover:text-black transition">Model</button>
             <button className="hover:text-black transition">Platform</button>
-            <button className="hover:text-black transition">News</button>
+            <Link href="/news" className="hover:text-black transition">News</Link>
             <button className="hover:text-black transition">Event</button>
           </nav>
         </div>

@@ -134,19 +134,19 @@ export default function ServicePage() {
 
             <div className="flex gap-4">
 
-              <button onClick={()=>{
+              <button onClick={() => {
 
-              document
+                document
 
-                .getElementById('template-process')
+                  .getElementById('template-process')
 
-                ?.scrollIntoView({
+                  ?.scrollIntoView({
 
-                  behavior:'smooth'
+                    behavior: 'smooth'
 
-                })
+                  })
 
-            }} className="
+              }} className="
                 h-16
 
                 px-10
@@ -194,34 +194,34 @@ export default function ServicePage() {
 
             {[
               {
-                src:'/service_video1.mp4',
-                className:'left-[-20px] top-[70px] rotate-[-7deg] w-[220px]'
+                src: '/service_video1.mp4',
+                className: 'left-[-20px] top-[70px] rotate-[-7deg] w-[220px]'
               },
               {
-                src:'/service_video2.mp4',
-                className:'left-[210px] top-[0px] rotate-[4deg] w-[260px]'
+                src: '/service_video2.mp4',
+                className: 'left-[210px] top-[0px] rotate-[4deg] w-[260px]'
               },
               {
-                src:'/service_video3.mp4',
-                className:'left-[500px] top-[110px] rotate-[-3deg] w-[220px]'
+                src: '/service_video3.mp4',
+                className: 'left-[500px] top-[110px] rotate-[-3deg] w-[220px]'
               },
               {
-                src:'/service_video4.mp4',
-                className:'left-[100px] top-[380px] rotate-[6deg] w-[240px]'
+                src: '/service_video4.mp4',
+                className: 'left-[100px] top-[380px] rotate-[6deg] w-[240px]'
               },
               {
-                src:'/service_video5.mp4',
-                className:'left-[380px] top-[380px] rotate-[-5deg] w-[260px]'
+                src: '/service_video5.mp4',
+                className: 'left-[380px] top-[380px] rotate-[-5deg] w-[260px]'
               },
               {
-                src:'/service_video6.mp4',
-                className:'left-[700px] top-[450px] rotate-[5deg] w-[200px]'
+                src: '/service_video6.mp4',
+                className: 'left-[700px] top-[450px] rotate-[5deg] w-[200px]'
               },
               {
-                src:'/service_video8.mp4',
-                className:'left-[760px] top-[90px] rotate-[8deg] w-[190px]'
+                src: '/service_video8.mp4',
+                className: 'left-[760px] top-[90px] rotate-[8deg] w-[190px]'
               },
-            ].map((item,index)=>(
+            ].map((item, index) => (
 
               <div
                 key={index}
@@ -280,7 +280,7 @@ export default function ServicePage() {
       {/* TEMPLATE PROCESS SECTION */}
       <TemplateProcessSection />
 
-      {/* TEMPLATE DEMO SECTION */}   
+      {/* TEMPLATE DEMO SECTION */}
 
       <TemplateDemoSection />
 
@@ -294,17 +294,30 @@ export default function ServicePage() {
 function TemplateProcessSection() {
 
   const [activeStep, setActiveStep] = useState(0)
+
   useEffect(() => {
 
-  const interval = setInterval(() => {
+    const interval = setInterval(() => {
 
-    setActiveStep((prev) => (prev + 1) % templateSteps.length)
+      setActiveStep((prev) => {
 
-  }, 2000)
+        if (prev >= templateSteps.length - 1) {
 
-  return () => clearInterval(interval)
+          clearInterval(interval)
 
-}, [])
+          return prev
+
+        }
+
+        return prev + 1
+
+      })
+
+    }, 2000)
+
+    return () => clearInterval(interval)
+
+  }, [])
 
   const goNext = () => {
     setActiveStep((prev) => (prev + 1) % templateSteps.length)
@@ -380,9 +393,9 @@ function TemplateProcessSection() {
           </div>
 
           {/* RIGHT TEXT */}
-<div
-  onClick={goNext}
-  className="
+          <div
+            onClick={goNext}
+            className="
     col-span-5
     rounded-[44px]
     bg-[#f8f7fb]
@@ -394,42 +407,42 @@ function TemplateProcessSection() {
     transition
     hover:bg-[#f3f1fa]
   "
->
+          >
 
-  {/* TOP */}
-  <div>
+            {/* TOP */}
+            <div>
 
-    <div className="text-violet-500 font-black tracking-[0.2em] text-sm mb-6">
-      {step.label}
-    </div>
+              <div className="text-violet-500 font-black tracking-[0.2em] text-sm mb-6">
+                {step.label}
+              </div>
 
-    <div
-      key={`title-${activeStep}`}
-      className="animate-[slideUp_0.45s_ease-out]"
-    >
+              <div
+                key={`title-${activeStep}`}
+                className="animate-[slideUp_0.45s_ease-out]"
+              >
 
-      <h3 className="text-[54px] leading-[1.05] font-black tracking-tight text-zinc-950 mb-7">
-        {step.title}
-      </h3>
+                <h3 className="text-[54px] leading-[1.05] font-black tracking-tight text-zinc-950 mb-7">
+                  {step.title}
+                </h3>
 
-      <p className="text-[20px] leading-relaxed text-zinc-500 max-w-[520px]">
-        {step.desc}
-      </p>
+                <p className="text-[20px] leading-relaxed text-zinc-500 max-w-[520px]">
+                  {step.desc}
+                </p>
 
-      {/* LAST STEP BUTTON */}
-      {activeStep === 3 && (
+                {/* LAST STEP BUTTON */}
+                {activeStep === 3 && (
 
-        <button
-          onClick={(e)=>{
-            e.stopPropagation()
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
 
-            document
-              .getElementById('template-demo')
-              ?.scrollIntoView({
-                behavior:'smooth'
-              })
-          }}
-          className="
+                      document
+                        .getElementById('template-demo')
+                        ?.scrollIntoView({
+                          behavior: 'smooth'
+                        })
+                    }}
+                    className="
 
             mt-10
 
@@ -458,45 +471,44 @@ function TemplateProcessSection() {
             transition
 
           "
-        >
-          데모 체험하기
-        </button>
+                  >
+                    데모 체험하기
+                  </button>
 
-      )}
+                )}
 
-    </div>
+              </div>
 
-  </div>
+            </div>
 
-  {/* STEP INDICATOR */}
-  <div className="flex items-center gap-3 mt-14">
+            {/* STEP INDICATOR */}
+            <div className="flex items-center gap-3 mt-14">
 
-    {templateSteps.map((_, index)=>(
+              {templateSteps.map((_, index) => (
 
-      <div
-        key={index}
-        className={`
+                <div
+                  key={index}
+                  className={`
           h-[6px]
           rounded-full
           transition-all
           duration-500
-          ${
-            activeStep === index
-              ? 'w-16 bg-violet-500'
-              : 'w-6 bg-zinc-300'
-          }
+          ${activeStep === index
+                      ? 'w-16 bg-violet-500'
+                      : 'w-6 bg-zinc-300'
+                    }
         `}
-      />
+                />
 
-    ))}
+              ))}
 
-  </div>
-
-</div>
+            </div>
 
           </div>
 
         </div>
+
+      </div>
 
     </section>
 
@@ -609,18 +621,18 @@ function TemplateDemoSection() {
 
         {/* CONTENT */}
         {/* CONTENT */}
-<div
-  className="
+        <div
+          className="
     grid
     grid-cols-13
     gap-14
     items-center
   "
->
+        >
 
-  {/* LEFT */}
-  <div
-    className="
+          {/* LEFT */}
+          <div
+            className="
       col-span-7
       rounded-[42px]
       bg-white
@@ -628,117 +640,115 @@ function TemplateDemoSection() {
       ml-9
       shadow-[0_10px_40px_rgba(120,80,255,0.08)]
     "
-  >
+          >
 
-    {/* IMAGE SELECT */}
-<div className="mb-8">
+            {/* IMAGE SELECT */}
+            <div className="mb-8">
 
-  <div className="
+              <div className="
     text-sm
     font-bold
     tracking-[0.18em]
     text-violet-500
     mb-5
   ">
-    IMAGE
-  </div>
+                IMAGE
+              </div>
 
-  <div className="
+              <div className="
     grid
     grid-cols-3
     gap-8
   ">
 
-    {images.map((img)=>(
+                {images.map((img) => (
 
-      <button
-        key={img}
-        onClick={()=>setSelectedImage(img)}
-        className={`
+                  <button
+                    key={img}
+                    onClick={() => setSelectedImage(img)}
+                    className={`
           relative
           aspect-[9/16]
           rounded-[22px]
           overflow-hidden
           transition
           duration-300
-          ${
-            selectedImage === img
-              ? 'ring-4 ring-violet-500 scale-[1.02]'
-              : 'hover:scale-[1.01]'
-          }
+          ${selectedImage === img
+                        ? 'ring-4 ring-violet-500 scale-[1.02]'
+                        : 'hover:scale-[1.01]'
+                      }
         `}
-      >
+                  >
 
-        <img
-          src={img}
-          className="
+                    <img
+                      src={img}
+                      className="
             w-full
             h-full
             object-cover
           "
-        />
+                    />
 
-      </button>
+                  </button>
 
-    ))}
+                ))}
 
-  </div>
+              </div>
 
-</div>
+            </div>
 
-    {/* TEMPLATE */}
-    <div className="mb-10">
+            {/* TEMPLATE */}
+            <div className="mb-10">
 
-      <div className="
+              <div className="
         text-sm
         font-bold
         tracking-[0.18em]
         text-violet-500
         mb-3
       ">
-        TEMPLATE
-      </div>
+                TEMPLATE
+              </div>
 
-      <div className="
+              <div className="
         flex
         flex-wrap
         gap-3
       ">
 
-        {templates.map((item)=>(
+                {templates.map((item) => (
 
-          <button
-            key={item}
-            onClick={()=>setSelectedTemplate(item)}
-            className={`
+                  <button
+                    key={item}
+                    onClick={() => setSelectedTemplate(item)}
+                    className={`
               h-11
               px-5
               rounded-full
               text-sm
               font-semibold
               transition
-              ${
-                selectedTemplate === item
-                  ? 'bg-black text-white'
-                  : 'bg-[#f4f1fb] text-zinc-600 hover:bg-zinc-200'
-              }
+              ${selectedTemplate === item
+                        ? 'bg-black text-white'
+                        : 'bg-[#f4f1fb] text-zinc-600 hover:bg-zinc-200'
+                      }
             `}
-          >
-            {item}
-          </button>
+                  >
+                    {item}
+                  </button>
 
-        ))}
+                ))}
 
-      </div>
+              </div>
 
-    </div>
+            </div>
 
-    {/* BUTTON */}
-    <div className="flex justify-center">
+            {/* BUTTON */}
+            <div className="flex justify-center">
 
-      <button
-        onClick={handleGenerate}
-        className="
+              <button
+                onClick={handleGenerate}
+                className="
           h-16
           px-14
           rounded-[22px]
@@ -756,18 +766,18 @@ function TemplateDemoSection() {
           hover:scale-[1.02]
           transition
         "
-      >
-        ✨ 영상 만들기
-      </button>
+              >
+                ✨ 영상 만들기
+              </button>
 
-    </div>
+            </div>
 
-  </div>
+          </div>
 
-  {/* RIGHT */}
-  <div
+          {/* RIGHT */}
+          <div
 
-  className="
+            className="
 
     col-span-5
 
@@ -781,10 +791,10 @@ function TemplateDemoSection() {
 
   "
 
->
+          >
 
-    <div
-      className="
+            <div
+              className="
         relative
         w-[340px]
         aspect-[9/16]
@@ -795,12 +805,12 @@ function TemplateDemoSection() {
 
         shadow-[0_30px_80px_rgba(0,0,0,0.18)]
       "
-    >
+            >
 
-      {/* idle */}
-      {!isGenerating && !generated && (
+              {/* idle */}
+              {!isGenerating && !generated && (
 
-        <div className="
+                <div className="
           absolute
           inset-0
           flex
@@ -812,40 +822,40 @@ function TemplateDemoSection() {
           px-10
         ">
 
-          <div className="
+                  <div className="
             text-[16px]
             mb-6
             opacity-40
           ">
-            🎬
-          </div>
+                    🎬
+                  </div>
 
-          <div className="
+                  <div className="
             text-[30px]
             leading-tight
             font-black
             mb-5
           ">
-            템플릿을 선택하고
-            <br />
-            영상을 만들어보세요
-          </div>
+                    템플릿을 선택하고
+                    <br />
+                    영상을 만들어보세요
+                  </div>
 
-          <div className="
+                  <div className="
             text-white/60
             text-[15px]
           ">
-            AI가 감성 숏폼을 생성합니다
-          </div>
+                    AI가 감성 숏폼을 생성합니다
+                  </div>
 
-        </div>
+                </div>
 
-      )}
+              )}
 
-      {/* generating */}
-      {isGenerating && (
+              {/* generating */}
+              {isGenerating && (
 
-        <div className="
+                <div className="
           absolute
           inset-0
           flex
@@ -855,7 +865,7 @@ function TemplateDemoSection() {
           text-white
         ">
 
-          <div className="
+                  <div className="
             w-14
             h-14
             rounded-full
@@ -866,51 +876,51 @@ function TemplateDemoSection() {
             mb-7
           " />
 
-          <div className="
+                  <div className="
             text-[26px]
             font-black
             mb-3
           ">
-            AI가 영상을 만들고 있어요
-          </div>
+                    AI가 영상을 만들고 있어요
+                  </div>
 
-          <div className="
+                  <div className="
             text-white/60
             text-sm
           ">
-            {selectedTemplate} 스타일 적용 중...
-          </div>
+                    {selectedTemplate} 스타일 적용 중...
+                  </div>
 
-        </div>
+                </div>
 
-      )}
+              )}
 
-      {/* RESULT */}
-      {generated && (
+              {/* RESULT */}
+              {generated && (
 
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="
             absolute
             inset-0
             w-full
             h-full
             object-cover
           "
-        >
-          <source src="/demo-result.mp4" type="video/mp4" />
-        </video>
+                >
+                  <source src="/demo-result.mp4" type="video/mp4" />
+                </video>
 
-      )}
+              )}
 
-    </div>
+            </div>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
       </div>
 

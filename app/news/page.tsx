@@ -3,7 +3,7 @@ import Footer from '../components/layout/Footer'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Kanana Inside',
+  title: 'Kanana News',
   description: '카나나의 최신 소식과 제품 이야기'
 }
 
@@ -96,7 +96,7 @@ export default function NewsPage() {
       <div className="flex items-end gap-5">
 
         <div className="text-[42px] leading-none font-black tracking-tight">
-          Kanana News
+          Kanana Inside
         </div>
 
         <div className="text-zinc-400 text-[15px] font-medium mb-[2px]">

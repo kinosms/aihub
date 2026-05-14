@@ -1,7 +1,39 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
+
+const templateSteps = [
+  {
+    label: 'STEP 01',
+    title: '이미지 넣기',
+    desc: '사용자가 원하는 사진 한 장을 선택합니다. 인물 사진, 여행 사진, 반려동물 사진처럼 어떤 이미지든 템플릿의 시작점이 됩니다.',
+    image: '/template-step1.png',
+    button: '이미지 넣기'
+  },
+  {
+    label: 'STEP 02',
+    title: '분위기 분석',
+    desc: '카나나 템플릿이 이미지 속 인물, 배경, 색감, 계절감과 분위기를 읽어 영상에 어울리는 연출 방향을 잡습니다.',
+    image: '/template-step2.png',
+    button: '분위기 분석'
+  },
+  {
+    label: 'STEP 03',
+    title: '영상 만들기',
+    desc: '선택한 템플릿에 맞춰 카메라 움직임, 장면 전환, 빛 번짐, 꽃잎 같은 효과를 더해 정적인 이미지를 움직이는 영상으로 바꿉니다.',
+    image: '/template-step3.png',
+    button: '영상 만들기'
+  },
+  {
+    label: 'STEP 04',
+    title: '결과물 완성',
+    desc: '완성된 영상은 숏폼에 어울리는 세로형 포맷으로 제공됩니다. 저장하거나 공유하기 좋은 형태로 바로 확인할 수 있습니다.',
+    image: '/template-step4.png',
+    button: '결과물 완성'
+  }
+]
 
 export default function ServicePage() {
 
@@ -15,140 +47,229 @@ export default function ServicePage() {
           SERVICE HERO
       ========================= */}
 
-      <section className="
-        relative
-        h-screen
-        overflow-hidden
-        bg-[#f6f1ed]
-      ">
+      <section className="relative h-[1200px] overflow-hidden bg-[#f7f4ee] pt-10">
 
-        {/* VIDEO AREA */}
+        {/* BG LIGHT */}
         <div className="
           absolute
-          inset-0
-          bg-zinc-200
-        ">
-          {/* 나중에 video 들어갈 영역 */}
-        </div>
-
-        {/* OVERLAY */}
-        <div className="
-          absolute
-          inset-0
-          bg-gradient-to-r
-          from-black/55
-          via-black/25
-          to-transparent
+          -top-[260px]
+          left-1/2
+          -translate-x-1/2
+          w-[1000px]
+          h-[1000px]
+          rounded-full
+          bg-violet-200/20
+          blur-3xl
         " />
 
-        {/* CONTENT */}
+        <div className="
+          absolute
+          bottom-[-200px]
+          right-[-100px]
+          w-[800px]
+          h-[800px]
+          rounded-full
+          bg-pink-200/20
+          blur-3xl
+        " />
+
         <div className="
           relative
           z-10
-          h-full
-          flex
+          max-w-[1700px]
+          mx-auto
+          px-10
+          grid
+          grid-cols-12
+          gap-10
           items-center
-          px-6
-          lg:px-28
+          min-h-screen
         ">
 
-          <div className="
-            w-full
-            grid
-            lg:grid-cols-2
-            gap-20
-            items-center
-          ">
+          {/* LEFT */}
+          <div className="col-span-5">
 
-            {/* LEFT TEXT */}
-            <div className="text-white">
+            <div className="
+              inline-flex
+              items-center
+              px-5
+              py-2
+              rounded-full
+              bg-white/80
+              backdrop-blur
+              text-violet-600
+              text-sm
+              font-bold
+              mb-8
+            ">
+              Kanana Template · AI Video
+            </div>
 
-              {/* badge */}
-              <div className="
-                inline-flex
-                items-center
-                px-4
-                py-2
-                rounded-full
-                bg-white/10
-                backdrop-blur
-                border
-                border-white/20
-                text-xs
-                tracking-[0.18em]
-                font-semibold
-                mb-8
-              ">
-                NEW EXPERIENCE
-              </div>
+            <h1 className="
+              text-[88px]
+              leading-[0.94]
+              font-black
+              tracking-tight
+              text-zinc-950
+              mb-8
+            ">
+              한 장의 이미지가
+              <br />
+              감성 숏폼이 되는
+              <br />
+              순간
+            </h1>
 
-              {/* title */}
-              <h1 className="
-                text-5xl
-                lg:text-7xl
-                font-black
-                tracking-tight
-                leading-[1.05]
-                mb-8
-              ">
-                카카오톡 대화,
-                <br />
-                AI가 핵심만
-                <br />
-                요약해드려요
-              </h1>
+            <p className="
+              text-[21px]
+              leading-relaxed
+              text-zinc-500
+              max-w-[540px]
+              mb-10
+            ">
+              카나나 템플릿은 사진 한 장만으로
+              분위기 있는 세로형 영상을 만들어주는
+              AI 영상 제작 서비스입니다.
+            </p>
 
-              {/* desc */}
-              <p className="
-                text-lg
-                lg:text-2xl
-                text-white/80
-                leading-relaxed
-                max-w-2xl
-                mb-12
-              ">
-                중요한 메시지를 놓치지 않도록,
-                <br />
-                카나나 AI가 대화의 흐름을 정리합니다.
-              </p>
+            <div className="flex gap-4">
 
-              {/* buttons */}
-              <div className="flex flex-wrap gap-4">
+              <button onClick={()=>{
 
-                <button className="
-                  px-7
-                  py-4
-                  rounded-2xl
-                  bg-[#7B61FF]
-                  text-white
-                  font-semibold
-                  hover:scale-[1.02]
-                  transition
-                ">
-                  무료로 시작하기
-                </button>
+              document
 
-                <button className="
-                  px-7
-                  py-4
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-white/10
-                  backdrop-blur
-                  text-white
-                  font-semibold
-                  hover:bg-white/20
-                  transition
-                ">
-                  서비스 소개 보기
-                </button>
+                .getElementById('template-process')
 
-              </div>
+                ?.scrollIntoView({
+
+                  behavior:'smooth'
+
+                })
+
+            }} className="
+                h-16
+
+    px-10
+
+    rounded-[22px]
+
+    bg-white/10
+
+    backdrop-blur-xl
+
+    border
+
+    border-white/20
+
+    text-black
+
+    text-[17px]
+
+    font-semibold
+
+    shadow-[0_10px_40px_rgba(0,0,0,0.18)]
+
+    hover:bg-white/15
+
+    hover:scale-[1.02]
+
+    transition
+
+    duration-300
+
+  ">
+                사용해보러 가기
+              </button>
 
             </div>
 
-            
+          </div>
+
+          {/* RIGHT VIDEO WALL */}
+          <div className="
+            col-span-7
+            relative
+            h-[960px]
+          ">
+
+            {[
+              {
+                src:'/service_video1.mp4',
+                className:'left-[-20px] top-[70px] rotate-[-7deg] w-[220px]'
+              },
+              {
+                src:'/service_video2.mp4',
+                className:'left-[210px] top-[0px] rotate-[4deg] w-[260px]'
+              },
+              {
+                src:'/service_video3.mp4',
+                className:'left-[500px] top-[110px] rotate-[-3deg] w-[220px]'
+              },
+              {
+                src:'/service_video4.mp4',
+                className:'left-[100px] top-[380px] rotate-[6deg] w-[240px]'
+              },
+              {
+                src:'/service_video5.mp4',
+                className:'left-[380px] top-[380px] rotate-[-5deg] w-[260px]'
+              },
+              {
+                src:'/service_video6.mp4',
+                className:'left-[700px] top-[450px] rotate-[5deg] w-[200px]'
+              },
+              {
+                src:'/service_video8.mp4',
+                className:'left-[760px] top-[90px] rotate-[8deg] w-[190px]'
+              },
+            ].map((item,index)=>(
+
+              <div
+                key={index}
+                className={`
+                  absolute
+                  aspect-[9/16]
+                  rounded-[38px]
+                  overflow-hidden
+                  shadow-[0_30px_80px_rgba(0,0,0,0.16)]
+                  ring-1
+                  ring-black/5
+                  bg-zinc-200
+                  group
+                  cursor-pointer
+                  ${item.className}
+                `}
+              >
+
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="
+                    w-full
+                    h-full
+                    object-cover
+                    group-hover:scale-[1.04]
+                    transition
+                    duration-700
+                  "
+                >
+                  <source src={item.src} type="video/mp4" />
+                </video>
+
+                <div className="
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-black/20
+                  via-transparent
+                  to-white/10
+                  pointer-events-none
+                " />
+
+              </div>
+
+            ))}
 
           </div>
 
@@ -156,289 +277,224 @@ export default function ServicePage() {
 
       </section>
 
+      {/* TEMPLATE PROCESS SECTION */}
+      <TemplateProcessSection />
 
-
-
-{/* =========================
-    SERVICE FEATURES
-========================= */}
-
-<section className="
-  relative
-  overflow-hidden
-  bg-white
-  py-32
-">
-
-  {/* soft glow */}
-  <div className="
-    absolute
-    top-0
-    left-1/2
-    -translate-x-1/2
-    w-[900px]
-    h-[900px]
-    rounded-full
-    bg-gradient-to-br
-    from-violet-100/40
-    via-pink-100/20
-    to-transparent
-    blur-3xl
-  " />
-
-  <div className="
-    relative
-    z-10
-    px-6
-    lg:px-24
-  ">
-
-    {/* =========================
-        TOP TEXT BLOCK
-    ========================= */}
-
-    <div className="
-      max-w-5xl
-      mx-auto
-      text-center
-      mb-24
-    ">
-
-      {/* section label */}
-      <div className="
-        text-[12px]
-        tracking-[0.28em]
-        text-violet-500
-        font-semibold
-        mb-6
-      ">
-        SMART FEATURES
-      </div>
-
-      {/* title */}
-      <h2 className="
-        text-4xl
-        lg:text-6xl
-        font-black
-        tracking-tight
-        leading-[1.1]
-        text-zinc-900
-        mb-8
-      ">
-        대화 속 중요한 순간을 놓치지 않도록,
-        <br />
-        <span className="text-violet-500">
-          Kanana가 도와드려요
-        </span>
-      </h2>
-
+      <Footer />
 
     </div>
 
-    {/* =========================
-        CARDS
-    ========================= */}
+  )
+}
 
-    <div className="
-      grid
-      md:grid-cols-3
-      gap-8
-    ">
+function TemplateProcessSection() {
 
-      {/* card 1 */}
-      <div className="
-        group
-        rounded-[36px]
-        overflow-hidden
-        bg-[#faf7ff]
-        border
-        border-violet-100
-        shadow-[0_10px_40px_rgba(120,80,255,0.08)]
-        transition-all
-        duration-500
-        hover:scale-[1.03]
-        hover:-translate-y-2
-      ">
+  const [activeStep, setActiveStep] = useState(0)
+  useEffect(() => {
 
-        {/* image */}
-        <div className="overflow-hidden">
+  const interval = setInterval(() => {
 
-          <img
-            src="/feature1.jpg"
-            alt=""
-            className="
-              w-full
-              h-[340px]
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-[1.05]
-            "
-          />
+    setActiveStep((prev) => (prev + 1) % templateSteps.length)
 
-        </div>
+  }, 2000)
 
-        {/* text */}
-        <div className="
-          p-8
-          text-center
-        ">
+  return () => clearInterval(interval)
 
-          <div className="
-            text-2xl
-            font-bold
-            text-zinc-900
-            mb-4
-          ">
-            일정 관리
+}, [])
+
+  const goNext = () => {
+    setActiveStep((prev) => (prev + 1) % templateSteps.length)
+  }
+
+  const step = templateSteps[activeStep]
+
+  return (
+
+    <section id="template-process" className="relative bg-white py-20 overflow-hidden">
+
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full bg-violet-100/40 blur-3xl" />
+
+      <div className="relative z-10 max-w-[1600px] mx-auto px-10">
+
+        <div className="text-center mb-20">
+
+          <div className="text-[13px] tracking-[0.32em] text-violet-500 font-bold mb-6">
+            HOW IT WORKS
           </div>
 
-          <p className="
-            text-zinc-600
-            leading-relaxed
-            max-w-[260px]
-            mx-auto
-          ">
-            중요한 일정과 약속을
-            자동으로 정리하고
-            다시 알려드립니다.
+          <h2 className="text-[56px] leading-tight font-black tracking-tight text-zinc-950">
+            이미지가 영상이 되는 과정
+          </h2>
+
+          <p className="mt-5 text-zinc-500 text-lg">
+            사진 한 장이 카나나 템플릿을 만나 감성 숏폼으로 완성됩니다.
           </p>
 
         </div>
 
-      </div>
+        <div className="grid grid-cols-12 gap-10 items-stretch">
 
-      {/* card 2 */}
-      <div className="
-        group
-        rounded-[36px]
-        overflow-hidden
-        bg-[#faf7ff]
-        border
-        border-violet-100
-        shadow-[0_10px_40px_rgba(120,80,255,0.08)]
-        transition-all
-        duration-500
-        hover:scale-[1.03]
-        hover:-translate-y-2
-      ">
+          {/* LEFT VISUAL */}
+          <div className="col-span-7 relative h-[500px] rounded-[44px] overflow-hidden bg-[#f5f2ff] shadow-sm">
 
-        <div className="overflow-hidden">
+            <div
+              key={activeStep}
+              className="
+                absolute
+                inset-0
+                animate-[slideUp_0.55s_ease-out]
+              "
+            >
 
-          <img
-            src="/feature2.jpg"
-            alt=""
-            className="
-              w-full
-              h-[340px]
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-[1.05]
-            "
-          />
+              <img
+                src={step.image}
+                className="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  object-cover
+                "
+              />
 
-        </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/10" />
 
-        <div className="
-          p-8
-          text-center
-        ">
+              <div className="absolute left-10 bottom-10">
 
-          <div className="
-            text-2xl
-            font-bold
-            text-zinc-900
-            mb-4
-          ">
-            대화 요약
+                <div className="inline-flex px-4 py-2 rounded-full bg-white/85 backdrop-blur text-sm font-bold text-violet-600 mb-5">
+                  {step.label}
+                </div>
+
+                <div className="text-white text-[54px] leading-tight font-black">
+                  {step.title}
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <p className="
-            text-zinc-600
-            leading-relaxed
-            max-w-[260px]
-            mx-auto
-          ">
-            긴 대화 속 핵심 내용을
-            빠르게 정리하고
-            필요한 정보만 전달합니다.
-          </p>
+          {/* RIGHT TEXT */}
+<div
+  onClick={goNext}
+  className="
+    col-span-5
+    rounded-[44px]
+    bg-[#f8f7fb]
+    p-12
+    flex
+    flex-col
+    justify-between
+    cursor-pointer
+    transition
+    hover:bg-[#f3f1fa]
+  "
+>
 
-        </div>
+  {/* TOP */}
+  <div>
 
-      </div>
+    <div className="text-violet-500 font-black tracking-[0.2em] text-sm mb-6">
+      {step.label}
+    </div>
 
-      {/* card 3 */}
-      <div className="
-        group
-        rounded-[36px]
-        overflow-hidden
-        bg-[#faf7ff]
-        border
-        border-violet-100
-        shadow-[0_10px_40px_rgba(120,80,255,0.08)]
-        transition-all
-        duration-500
-        hover:scale-[1.03]
-        hover:-translate-y-2
-      ">
+    <div
+      key={`title-${activeStep}`}
+      className="animate-[slideUp_0.45s_ease-out]"
+    >
 
-        <div className="overflow-hidden">
+      <h3 className="text-[54px] leading-[1.05] font-black tracking-tight text-zinc-950 mb-7">
+        {step.title}
+      </h3>
 
-          <img
-            src="/feature3.jpg"
-            alt=""
-            className="
-              w-full
-              h-[340px]
-              object-cover
-              transition-transform
-              duration-700
-              group-hover:scale-[1.05]
-            "
-          />
+      <p className="text-[20px] leading-relaxed text-zinc-500 max-w-[520px]">
+        {step.desc}
+      </p>
 
-        </div>
+      {/* LAST STEP BUTTON */}
+      {activeStep === 3 && (
 
-        <div className="
-          p-8
-          text-center
-        ">
+        <button
+          onClick={(e)=>{
+            e.stopPropagation()
 
-          <div className="
-            text-2xl
+            document
+              .getElementById('template-demo')
+              ?.scrollIntoView({
+                behavior:'smooth'
+              })
+          }}
+          className="
+
+            mt-10
+
+            h-14
+
+            px-8
+
+            rounded-full
+
+            bg-gradient-to-r
+
+            from-[#6f2cff]
+
+            to-[#e233ff]
+
+            text-white
+
+            text-sm
+
             font-bold
-            text-zinc-900
-            mb-4
-          ">
-            예약 알림
-          </div>
 
-          <p className="
-            text-zinc-600
-            leading-relaxed
-            max-w-[260px]
-            mx-auto
-          ">
-            예약과 중요한 메시지를
-            놓치지 않도록
-            미리 안내해드립니다.
-          </p>
+            shadow-[0_10px_30px_rgba(170,80,255,0.35)]
 
-        </div>
+            hover:scale-[1.03]
 
-      </div>
+            transition
+
+          "
+        >
+          데모 체험하기
+        </button>
+
+      )}
 
     </div>
 
   </div>
 
-</section>
+  {/* STEP INDICATOR */}
+  <div className="flex items-center gap-3 mt-14">
 
-      <Footer />
+    {templateSteps.map((_, index)=>(
 
-    </div>
+      <div
+        key={index}
+        className={`
+          h-[6px]
+          rounded-full
+          transition-all
+          duration-500
+          ${
+            activeStep === index
+              ? 'w-16 bg-violet-500'
+              : 'w-6 bg-zinc-300'
+          }
+        `}
+      />
+
+    ))}
+
+  </div>
+
+</div>
+
+          </div>
+
+        </div>
+
+    </section>
 
   )
 }

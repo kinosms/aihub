@@ -11,61 +11,61 @@ export default function NewsPage() {
 
   const pressNews = [
     {
-      image:'/news1.png',
-      title:'카나나 AI, 추천 기능 대규모 업데이트',
-      badge:'ZDNET',
-      date:'2026.05.14'
+      image: '/news1.png',
+      title: '카나나 AI, 추천 기능 대규모 업데이트',
+      badge: 'ZDNET',
+      date: '2026.05.14'
     },
     {
-      image:'/news2.png',
-      title:'카카오 AI 전략의 중심, 카나나',
-      badge:'TechCrunch',
-      date:'2026.05.12'
+      image: '/news2.png',
+      title: '카카오 AI 전략의 중심, 카나나',
+      badge: 'TechCrunch',
+      date: '2026.05.12'
     },
     {
-      image:'/news3.png',
-      title:'AI 일상 플랫폼 경쟁 본격화',
-      badge:'Forbes',
-      date:'2026.05.11'
+      image: '/news3.png',
+      title: 'AI 일상 플랫폼 경쟁 본격화',
+      badge: 'Forbes',
+      date: '2026.05.11'
     },
     {
-      image:'/news4.png',
-      title:'카나나, 사용자 경험 중심 강화',
-      badge:'Bloter',
-      date:'2026.05.09'
+      image: '/news4.png',
+      title: '카나나, 사용자 경험 중심 강화',
+      badge: 'Bloter',
+      date: '2026.05.09'
     }
   ]
 
   const stories = [
     {
-      image:'/story1.png',
-      title:'카나나와 함께한 나의 하루'
+      image: '/story1.png',
+      title: '카나나와 함께한 나의 하루'
     },
     {
-      image:'/story2.png',
-      title:'약속 잡기가 쉬워졌어요'
+      image: '/story2.png',
+      title: '약속 잡기가 쉬워졌어요'
     },
     {
-      image:'/story3.png',
-      title:'AI 활용으로 달라진 업무 루틴'
+      image: '/story3.png',
+      title: 'AI 활용으로 달라진 업무 루틴'
     }
   ]
 
   const lineup = [
     {
-      image:'/lineup1.png',
-      title:'Kanana Voice',
-      desc:'대화만으로 완성되는 AI 비서'
+      image: '/lineup1.png',
+      title: 'Kanana Voice',
+      desc: '대화만으로 완성되는 AI 비서'
     },
     {
-      image:'/lineup2.png',
-      title:'Kanana Studio',
-      desc:'나만의 AI를 만드는 새로운 방법'
+      image: '/lineup2.png',
+      title: 'Kanana Studio',
+      desc: '나만의 AI를 만드는 새로운 방법'
     },
     {
-      image:'/lineup3.png',
-      title:'Kanana Business',
-      desc:'비즈니스를 위한 AI 솔루션'
+      image: '/lineup3.png',
+      title: 'Kanana Business',
+      desc: '비즈니스를 위한 AI 솔루션'
     }
   ]
 
@@ -86,26 +86,26 @@ export default function NewsPage() {
 
       <main>
 
-      <section className="pt-32 pb-16 overflow-hidden">
+        <section className="pt-32 pb-16 overflow-hidden">
 
-  <div className="max-w-[1600px] mx-auto pl-10">
+          <div className="max-w-[1600px] mx-auto pl-10">
 
-    {/* TITLE */}
-    <div className="flex items-center justify-between mb-7 pr-10">
+            {/* TITLE */}
+            <div className="flex items-center justify-between mb-7 pr-10">
 
-      <div className="flex items-end gap-5">
+              <div className="flex items-end gap-5">
 
-        <div className="text-[42px] leading-none font-black tracking-tight">
-          Kanana Inside
-        </div>
+                <div className="text-[42px] leading-none font-black tracking-tight">
+                  Kanana Inside
+                </div>
 
-        <div className="text-zinc-400 text-[15px] font-medium mb-[2px]">
-          카나나의 최신 소식과 다양한 이야기
-        </div>
+                <div className="text-zinc-400 text-[15px] font-medium mb-[2px]">
+                  카나나의 최신 소식과 다양한 이야기
+                </div>
 
-      </div>
+              </div>
 
-      <button className="
+              <button className="
         h-12
         px-6
         rounded-full
@@ -115,26 +115,26 @@ export default function NewsPage() {
         hover:scale-[1.03]
         transition
       ">
-        뉴스레터 구독
-      </button>
+                뉴스레터 구독
+              </button>
 
-    </div>
+            </div>
 
-    {/* TOP AREA */}
-<div className="
+            {/* TOP AREA */}
+            <div className="
   overflow-x-auto
   scrollbar-hide
 ">
 
-  <div className="
+              <div className="
     flex
     gap-6
     w-max
     pr-24
   ">
 
-    {/* BIG CARD */}
-    <div className="
+                {/* BIG CARD */}
+                <div className="
       relative
       w-[620px]
       h-[320px]
@@ -145,9 +145,9 @@ export default function NewsPage() {
       flex-shrink-0
     ">
 
-      <img
-        src="/top1.png"
-        className="
+                  <img
+                    src="/top1.png"
+                    className="
           absolute
           inset-0
           w-full
@@ -159,9 +159,9 @@ export default function NewsPage() {
           transition
           duration-1000
         "
-      />
+                  />
 
-      <div className="
+                  <div className="
         absolute
         inset-0
         bg-gradient-to-t
@@ -169,29 +169,29 @@ export default function NewsPage() {
         to-transparent
       " />
 
-      <div className="
+                  <div className="
         absolute
         bottom-0
         left-0
         p-8
       ">
 
-        <div className="
+                    <div className="
           text-white
           text-[42px]
           leading-tight
           font-black
         ">
-          카나나 AI
-          업데이트 공개
-        </div>
+                      카나나 AI
+                      업데이트 공개
+                    </div>
 
-      </div>
+                  </div>
 
-    </div>
+                </div>
 
-    {/* CARD 1 */}
-    <div className="
+                {/* CARD 1 */}
+                <div className="
       relative
       w-[340px]
       h-[320px]
@@ -202,9 +202,9 @@ export default function NewsPage() {
       flex-shrink-0
     ">
 
-      <img
-        src="/top-small1.png"
-        className="
+                  <img
+                    src="/top-small1.png"
+                    className="
           absolute
           inset-0
           w-full
@@ -215,9 +215,9 @@ export default function NewsPage() {
           transition
           duration-1000
         "
-      />
+                  />
 
-      <div className="
+                  <div className="
         absolute
         inset-0
         bg-gradient-to-t
@@ -225,30 +225,30 @@ export default function NewsPage() {
         to-transparent
       " />
 
-      <div className="
+                  <div className="
         absolute
         bottom-0
         left-0
         p-7
       ">
 
-        <div className="
+                    <div className="
           text-white
           text-[30px]
           leading-tight
           font-black
           max-w-[260px]
         ">
-          친구와 함께 찾는
-          새로운 장소
-        </div>
+                      친구와 함께 찾는
+                      새로운 장소
+                    </div>
 
-      </div>
+                  </div>
 
-    </div>
+                </div>
 
-    {/* CARD 2 */}
-    <div className="
+                {/* CARD 2 */}
+                <div className="
       relative
       w-[340px]
       h-[320px]
@@ -259,9 +259,9 @@ export default function NewsPage() {
       flex-shrink-0
     ">
 
-      <img
-        src="/top-small3.png"
-        className="
+                  <img
+                    src="/top-small3.png"
+                    className="
           absolute
           inset-0
           w-full
@@ -272,9 +272,9 @@ export default function NewsPage() {
           transition
           duration-1000
         "
-      />
+                  />
 
-      <div className="
+                  <div className="
         absolute
         inset-0
         bg-gradient-to-t
@@ -282,30 +282,30 @@ export default function NewsPage() {
         to-transparent
       " />
 
-      <div className="
+                  <div className="
         absolute
         bottom-0
         left-0
         p-7
       ">
 
-        <div className="
+                    <div className="
           text-white
           text-[30px]
           leading-tight
           font-black
           max-w-[260px]
         ">
-          AI로 더 쉬워진
-          여행 계획
-        </div>
+                      AI로 더 쉬워진
+                      여행 계획
+                    </div>
 
-      </div>
+                  </div>
 
-    </div>
+                </div>
 
-    {/* CARD 3 */}
-    <div className="
+                {/* CARD 3 */}
+                <div className="
       relative
       w-[340px]
       h-[320px]
@@ -316,9 +316,9 @@ export default function NewsPage() {
       flex-shrink-0
     ">
 
-      <img
-        src="/lineup2.png"
-        className="
+                  <img
+                    src="/lineup2.png"
+                    className="
           absolute
           inset-0
           w-full
@@ -329,9 +329,9 @@ export default function NewsPage() {
           transition
           duration-1000
         "
-      />
+                  />
 
-      <div className="
+                  <div className="
         absolute
         inset-0
         bg-gradient-to-t
@@ -339,30 +339,30 @@ export default function NewsPage() {
         to-transparent
       " />
 
-      <div className="
+                  <div className="
         absolute
         bottom-0
         left-0
         p-7
       ">
 
-        <div className="
+                    <div className="
           text-white
           text-[30px]
           leading-tight
           font-black
           max-w-[260px]
         ">
-          카카오톡 번역으로
-          더 편한 일본 여행
-        </div>
+                      카카오톡 번역으로
+                      더 편한 일본 여행
+                    </div>
 
-      </div>
+                  </div>
 
-    </div>
+                </div>
 
-    {/* CARD 4 */}
-    <div className="
+                {/* CARD 4 */}
+                <div className="
       relative
       w-[340px]
       h-[320px]
@@ -377,31 +377,31 @@ export default function NewsPage() {
       flex-shrink-0
     ">
 
-      <div>
+                  <div>
 
-        <div className="
+                    <div className="
           text-[38px]
           leading-[1.05]
           font-black
           mb-5
         ">
-          오늘 가장
-          많이 본
-          카나나 기능
-        </div>
+                      오늘 가장
+                      많이 본
+                      카나나 기능
+                    </div>
 
-        <div className="
+                    <div className="
           text-zinc-600
           leading-relaxed
         ">
-          사용자들이 가장 많이
-          탐색한 AI 기능들을
-          만나보세요.
-        </div>
+                      사용자들이 가장 많이
+                      탐색한 AI 기능들을
+                      만나보세요.
+                    </div>
 
-      </div>
+                  </div>
 
-      <div className="
+                  <div className="
         w-14
         h-14
         rounded-full
@@ -412,18 +412,18 @@ export default function NewsPage() {
         justify-center
         text-xl
       ">
-        →
-      </div>
+                    →
+                  </div>
 
-    </div>
+                </div>
 
-  </div>
+              </div>
 
-</div>
+            </div>
 
-  </div>
+          </div>
 
-</section>
+        </section>
 
         {/* SECTION 1 : PRESS NEWS */}
 
@@ -453,7 +453,7 @@ export default function NewsPage() {
                 hover:[animation-play-state:paused]
               ">
 
-                {pressNews.concat(pressNews).map((item,index)=>(
+                {pressNews.concat(pressNews).map((item, index) => (
 
                   <div
                     key={index}
@@ -627,7 +627,7 @@ export default function NewsPage() {
                 gap-8
               ">
 
-                {stories.slice(1).map((item,index)=>(
+                {stories.slice(1).map((item, index) => (
 
                   <div
                     key={index}
@@ -698,7 +698,7 @@ export default function NewsPage() {
 
             <div className="flex items-end gap-5 mb-10">
 
-  <div className="
+              <div className="
 
     text-[42px]
 
@@ -710,11 +710,11 @@ export default function NewsPage() {
 
   ">
 
-    Kanana Line-up
+                Kanana Line-up
 
-  </div>
+              </div>
 
-  <div className="
+              <div className="
 
     text-zinc-400
 
@@ -726,15 +726,15 @@ export default function NewsPage() {
 
   ">
 
-    더 넓어진 카나나 AI 생태계
+                더 넓어진 카나나 AI 생태계
 
-  </div>
+              </div>
 
-</div>
+            </div>
 
             <div className="grid grid-cols-3 gap-8">
 
-              {lineup.map((item,index)=>(
+              {lineup.map((item, index) => (
 
                 <div
                   key={index}
@@ -797,13 +797,13 @@ export default function NewsPage() {
 
         {/* SECTION 4 : MOMENTS */}
 
-<section className="py-10">
+        <section className="py-10">
 
-  <div className="max-w-[1600px] mx-auto px-10">
+          <div className="max-w-[1600px] mx-auto px-10">
 
-    <div className="flex items-end gap-5 mb-10">
+            <div className="flex items-end gap-5 mb-10">
 
-      <div className="
+              <div className="
 
         text-[42px]
 
@@ -815,11 +815,11 @@ export default function NewsPage() {
 
       ">
 
-        Kanana Moments
+                Kanana Moments
 
-      </div>
+              </div>
 
-      <div className="
+              <div className="
 
         text-zinc-400
 
@@ -831,13 +831,13 @@ export default function NewsPage() {
 
       ">
 
-        AI가 스며든 다양한 순간들
+                AI가 스며든 다양한 순간들
 
-      </div>
+              </div>
 
-    </div>
+            </div>
 
-    <div className="
+            <div className="
 
       grid
 
@@ -847,13 +847,13 @@ export default function NewsPage() {
 
     ">
 
-      {moments.map((item,index)=>(
+              {moments.map((item, index) => (
 
-        <div
+                <div
 
-          key={index}
+                  key={index}
 
-          className="
+                  className="
 
             relative
 
@@ -871,13 +871,13 @@ export default function NewsPage() {
 
           "
 
-        >
+                >
 
-          <img
+                  <img
 
-            src={item}
+                    src={item}
 
-            className="
+                    className="
 
               absolute
 
@@ -899,9 +899,9 @@ export default function NewsPage() {
 
             "
 
-          />
+                  />
 
-          <div className="
+                  <div className="
 
             absolute
 
@@ -923,15 +923,15 @@ export default function NewsPage() {
 
           " />
 
-        </div>
+                </div>
 
-      ))}
+              ))}
 
-    </div>
+            </div>
 
-  </div>
+          </div>
 
-</section>
+        </section>
 
       </main>
 

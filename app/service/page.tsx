@@ -178,7 +178,7 @@ export default function ServicePage() {
                 duration-300
 
               ">
-                사용해보러 가기
+                알아보기
               </button>
 
             </div>
@@ -283,6 +283,10 @@ export default function ServicePage() {
       {/* TEMPLATE DEMO SECTION */}
 
       <TemplateDemoSection />
+
+      {/* ModelSection SECTION */}
+
+      <ModelSection />
 
       <Footer />
 
@@ -928,3 +932,373 @@ function TemplateDemoSection() {
 
   )
 }
+
+
+
+
+{/* =========================
+    MODEL SECTION
+========================= */}
+function ModelSection(){
+    return (
+<section className="relative bg-white py-32 overflow-hidden">
+
+  {/* glow */}
+  <div className="
+    absolute
+    top-0
+    left-1/2
+    -translate-x-1/2
+    w-[1200px]
+    h-[1200px]
+    rounded-full
+    bg-violet-100/30
+    blur-3xl
+  " />
+
+  <div className="
+    relative
+    z-10
+    max-w-[1600px]
+    mx-auto
+    px-10
+  ">
+
+    {/* TITLE */}
+    <div className="text-center mb-20">
+
+      <div className="
+        inline-flex
+        items-center
+        px-6
+        py-3
+        rounded-full
+        bg-violet-50
+        text-violet-600
+        text-[15px]
+        font-bold
+        mb-8
+      ">
+        Powered by Kanana AI
+      </div>
+
+      <h2 className="
+        text-[50px]
+        leading-tight
+        font-black
+        tracking-tight
+        text-zinc-950
+        mb-7
+      ">
+        <span className="text-violet-600">
+          Kanana V
+        </span>
+        모델로 더 정확하고
+        스마트한 생성 경험을 제공합니다
+      </h2>
+
+      <p className="
+        text-[22px]
+        leading-relaxed
+        text-zinc-500
+      ">
+        이미지 이해부터 영상 생성까지,
+        Kanana-V AI의 다양한 모델 기술이 함께 작동합니다.
+      </p>
+
+    </div>
+
+    {/* MODEL LIST */}
+    <div className="space-y-8">
+
+      {/* MODEL 1 */}
+      <div className="
+        rounded-[38px]
+        border
+        border-zinc-200
+        bg-white
+        px-10
+        py-10
+
+        shadow-[0_10px_40px_rgba(0,0,0,0.04)]
+
+        flex
+        items-center
+        justify-between
+      ">
+
+        {/* LEFT */}
+        <div className="flex items-center gap-10">
+
+          {/* icon */}
+          <div className="
+            w-[120px]
+            h-[120px]
+            rounded-[30px]
+
+            bg-gradient-to-br
+            from-violet-300
+            to-violet-500
+
+            flex
+            items-center
+            justify-center
+
+            text-white
+            text-[54px]
+          ">
+            ✨
+          </div>
+
+          {/* title */}
+          <div>
+
+            <div className="
+              text-[54px]
+              font-black
+              tracking-tight
+              text-violet-600
+              mb-2
+            ">
+              Kanana-Video
+            </div>
+
+            <div className="
+              text-[24px]
+              text-zinc-600
+            ">
+              이미지 기반 영상 생성 모델
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* FEATURES */}
+        <div className="
+          flex
+          items-center
+          gap-20
+        ">
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              Motion Render
+            </div>
+
+            <div className="text-zinc-500">
+              움직임 생성 및 장면 연출
+            </div>
+          </div>
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              Style Engine
+            </div>
+
+            <div className="text-zinc-500">
+              템플릿 분위기 스타일링
+            </div>
+          </div>
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              AI Enhance
+            </div>
+
+            <div className="text-zinc-500">
+              디테일 및 감성 보정
+            </div>
+          </div>
+
+        </div>
+
+        {/* BUTTON */}
+        <button
+          onClick={()=>{
+            location.href='/model/video'
+          }}
+          className="
+            w-20
+            h-20
+            rounded-full
+
+            border
+            border-violet-200
+
+            flex
+            items-center
+            justify-center
+
+            text-violet-600
+            text-[34px]
+
+            hover:bg-violet-50
+            hover:scale-[1.04]
+
+            transition
+          "
+        >
+          →
+        </button>
+
+      </div>
+
+      {/* MODEL 2 */}
+      <div className="
+        rounded-[38px]
+        border
+        border-zinc-200
+        bg-white
+        px-10
+        py-10
+
+        shadow-[0_10px_40px_rgba(0,0,0,0.04)]
+
+        flex
+        items-center
+        justify-between
+      ">
+
+        <div className="flex items-center gap-10">
+
+          <div className="
+            w-[120px]
+            h-[120px]
+            rounded-[30px]
+
+            bg-gradient-to-br
+            from-pink-300
+            to-pink-500
+
+            flex
+            items-center
+            justify-center
+
+            text-white
+            text-[50px]
+          ">
+            🎨
+          </div>
+
+          <div>
+
+            <div className="
+              text-[54px]
+              font-black
+              tracking-tight
+              text-pink-500
+              mb-2
+            ">
+              Kanana-Style
+            </div>
+
+            <div className="
+              text-[24px]
+              text-zinc-600
+            ">
+              감성 템플릿 스타일 모델
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="
+          flex
+          items-center
+          gap-20
+        ">
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              Color Mood
+            </div>
+
+            <div className="text-zinc-500">
+              색감 및 무드 분석
+            </div>
+          </div>
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              Scene Tone
+            </div>
+
+            <div className="text-zinc-500">
+              분위기 연출 최적화
+            </div>
+          </div>
+
+          <div>
+            <div className="
+              text-[28px]
+              font-black
+              mb-2
+            ">
+              Template AI
+            </div>
+
+            <div className="text-zinc-500">
+              템플릿 스타일 적용
+            </div>
+          </div>
+
+        </div>
+
+        <button
+          onClick={()=>{
+            location.href='/model/style'
+          }}
+          className="
+            w-20
+            h-20
+            rounded-full
+
+            border
+            border-pink-200
+
+            flex
+            items-center
+            justify-center
+
+            text-pink-500
+            text-[34px]
+
+            hover:bg-pink-50
+            hover:scale-[1.04]
+
+            transition
+          "
+        >
+          →
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+)}

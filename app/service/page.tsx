@@ -149,35 +149,35 @@ export default function ServicePage() {
             }} className="
                 h-16
 
-    px-10
+                px-10
 
-    rounded-[22px]
+                rounded-[22px]
 
-    bg-white/10
+                bg-white/10
 
-    backdrop-blur-xl
+                backdrop-blur-xl
 
-    border
+                border
 
-    border-white/20
+                border-white/20
 
-    text-black
+                text-black
 
-    text-[17px]
+                text-[17px]
 
-    font-semibold
+                font-semibold
 
-    shadow-[0_10px_40px_rgba(0,0,0,0.18)]
+                shadow-[0_10px_40px_rgba(0,0,0,0.18)]
 
-    hover:bg-white/15
+                hover:bg-white/15
 
-    hover:scale-[1.02]
+                hover:scale-[1.02]
 
-    transition
+                transition
 
-    duration-300
+                duration-300
 
-  ">
+              ">
                 사용해보러 가기
               </button>
 
@@ -279,6 +279,10 @@ export default function ServicePage() {
 
       {/* TEMPLATE PROCESS SECTION */}
       <TemplateProcessSection />
+
+      {/* TEMPLATE DEMO SECTION */}   
+
+      <TemplateDemoSection />
 
       <Footer />
 
@@ -493,6 +497,422 @@ function TemplateProcessSection() {
           </div>
 
         </div>
+
+    </section>
+
+
+
+  )
+}
+
+
+
+
+
+
+
+function TemplateDemoSection() {
+
+  const templates = [
+    'Cherry Blossom',
+    'Rain Mood',
+    'Travel Film',
+    'Vintage Diary',
+    'Night Drive',
+
+  ]
+
+  const images = [
+    '/demo-image1.png',
+    '/demo-image2.png',
+    '/demo-image3.png'
+  ]
+
+  const [selectedImage, setSelectedImage] = useState(images[0])
+  const [selectedTemplate, setSelectedTemplate] = useState(templates[0])
+
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generated, setGenerated] = useState(false)
+
+  const handleGenerate = () => {
+
+    setGenerated(false)
+    setIsGenerating(true)
+
+    setTimeout(() => {
+
+      setIsGenerating(false)
+      setGenerated(true)
+
+    }, 2500)
+
+  }
+
+  return (
+
+    <section
+      id="template-demo"
+      className="
+        relative
+        overflow-hidden
+        bg-[#faf7ff]
+        py-28
+      "
+    >
+
+      {/* glow */}
+      <div className="
+        absolute
+        top-0
+        left-1/2
+        -translate-x-1/2
+        w-[1000px]
+        h-[1000px]
+        rounded-full
+        bg-violet-200/20
+        blur-3xl
+      " />
+
+      <div className="
+        relative
+        z-10
+        max-w-[1600px]
+        mx-auto
+        px-10
+      ">
+
+        {/* TITLE */}
+        <div className="text-center mb-6">
+
+          <div className="
+            text-[13px]
+            tracking-[0.32em]
+            text-violet-500
+            font-bold
+            mb-6
+          ">
+            TEMPLATE DEMO
+          </div>
+
+          <h2 className="
+            text-[58px]
+            leading-tight
+            font-black
+            tracking-tight
+            text-zinc-950
+            mb-6
+          ">
+            사진 한 장으로 분위기를 바꿔보세요
+          </h2>
+
+        </div>
+
+        {/* CONTENT */}
+        {/* CONTENT */}
+<div
+  className="
+    grid
+    grid-cols-13
+    gap-14
+    items-center
+  "
+>
+
+  {/* LEFT */}
+  <div
+    className="
+      col-span-7
+      rounded-[42px]
+      bg-white
+      p-3
+      ml-9
+      shadow-[0_10px_40px_rgba(120,80,255,0.08)]
+    "
+  >
+
+    {/* IMAGE SELECT */}
+<div className="mb-8">
+
+  <div className="
+    text-sm
+    font-bold
+    tracking-[0.18em]
+    text-violet-500
+    mb-5
+  ">
+    IMAGE
+  </div>
+
+  <div className="
+    grid
+    grid-cols-3
+    gap-8
+  ">
+
+    {images.map((img)=>(
+
+      <button
+        key={img}
+        onClick={()=>setSelectedImage(img)}
+        className={`
+          relative
+          aspect-[9/16]
+          rounded-[22px]
+          overflow-hidden
+          transition
+          duration-300
+          ${
+            selectedImage === img
+              ? 'ring-4 ring-violet-500 scale-[1.02]'
+              : 'hover:scale-[1.01]'
+          }
+        `}
+      >
+
+        <img
+          src={img}
+          className="
+            w-full
+            h-full
+            object-cover
+          "
+        />
+
+      </button>
+
+    ))}
+
+  </div>
+
+</div>
+
+    {/* TEMPLATE */}
+    <div className="mb-10">
+
+      <div className="
+        text-sm
+        font-bold
+        tracking-[0.18em]
+        text-violet-500
+        mb-3
+      ">
+        TEMPLATE
+      </div>
+
+      <div className="
+        flex
+        flex-wrap
+        gap-3
+      ">
+
+        {templates.map((item)=>(
+
+          <button
+            key={item}
+            onClick={()=>setSelectedTemplate(item)}
+            className={`
+              h-11
+              px-5
+              rounded-full
+              text-sm
+              font-semibold
+              transition
+              ${
+                selectedTemplate === item
+                  ? 'bg-black text-white'
+                  : 'bg-[#f4f1fb] text-zinc-600 hover:bg-zinc-200'
+              }
+            `}
+          >
+            {item}
+          </button>
+
+        ))}
+
+      </div>
+
+    </div>
+
+    {/* BUTTON */}
+    <div className="flex justify-center">
+
+      <button
+        onClick={handleGenerate}
+        className="
+          h-16
+          px-14
+          rounded-[22px]
+
+          bg-gradient-to-r
+          from-[#6f2cff]
+          to-[#e233ff]
+
+          text-white
+          text-[18px]
+          font-bold
+
+          shadow-[0_10px_30px_rgba(170,80,255,0.35)]
+
+          hover:scale-[1.02]
+          transition
+        "
+      >
+        ✨ 영상 만들기
+      </button>
+
+    </div>
+
+  </div>
+
+  {/* RIGHT */}
+  <div
+
+  className="
+
+    col-span-5
+
+    flex
+
+    justify-center
+
+    items-start
+    ml-20
+    pt-[1px]
+
+  "
+
+>
+
+    <div
+      className="
+        relative
+        w-[340px]
+        aspect-[9/16]
+
+        rounded-[42px]
+        bg-black
+        overflow-hidden
+
+        shadow-[0_30px_80px_rgba(0,0,0,0.18)]
+      "
+    >
+
+      {/* idle */}
+      {!isGenerating && !generated && (
+
+        <div className="
+          absolute
+          inset-0
+          flex
+          flex-col
+          items-center
+          justify-center
+          text-center
+          text-white
+          px-10
+        ">
+
+          <div className="
+            text-[16px]
+            mb-6
+            opacity-40
+          ">
+            🎬
+          </div>
+
+          <div className="
+            text-[30px]
+            leading-tight
+            font-black
+            mb-5
+          ">
+            템플릿을 선택하고
+            <br />
+            영상을 만들어보세요
+          </div>
+
+          <div className="
+            text-white/60
+            text-[15px]
+          ">
+            AI가 감성 숏폼을 생성합니다
+          </div>
+
+        </div>
+
+      )}
+
+      {/* generating */}
+      {isGenerating && (
+
+        <div className="
+          absolute
+          inset-0
+          flex
+          flex-col
+          items-center
+          justify-center
+          text-white
+        ">
+
+          <div className="
+            w-14
+            h-14
+            rounded-full
+            border-[3px]
+            border-white/20
+            border-t-white
+            animate-spin
+            mb-7
+          " />
+
+          <div className="
+            text-[26px]
+            font-black
+            mb-3
+          ">
+            AI가 영상을 만들고 있어요
+          </div>
+
+          <div className="
+            text-white/60
+            text-sm
+          ">
+            {selectedTemplate} 스타일 적용 중...
+          </div>
+
+        </div>
+
+      )}
+
+      {/* RESULT */}
+      {generated && (
+
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="
+            absolute
+            inset-0
+            w-full
+            h-full
+            object-cover
+          "
+        >
+          <source src="/demo-result.mp4" type="video/mp4" />
+        </video>
+
+      )}
+
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
 
     </section>
 

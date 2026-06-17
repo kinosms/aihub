@@ -301,27 +301,15 @@ function TemplateProcessSection() {
 
   useEffect(() => {
 
-    const interval = setInterval(() => {
+  const interval = setInterval(() => {
 
-      setActiveStep((prev) => {
+    setActiveStep((prev) => (prev + 1) % templateSteps.length)
 
-        if (prev >= templateSteps.length - 1) {
+  }, 2000)
 
-          clearInterval(interval)
+  return () => clearInterval(interval)
 
-          return prev
-
-        }
-
-        return prev + 1
-
-      })
-
-    }, 2000)
-
-    return () => clearInterval(interval)
-
-  }, [])
+}, [])
 
   const goNext = () => {
     setActiveStep((prev) => (prev + 1) % templateSteps.length)
@@ -359,13 +347,10 @@ function TemplateProcessSection() {
           <div className="col-span-7 relative h-[500px] rounded-[44px] overflow-hidden bg-[#f5f2ff] shadow-sm">
 
             <div
-              key={activeStep}
-              className="
-                absolute
-                inset-0
-                animate-[slideUp_0.55s_ease-out]
-              "
-            >
+
+  className="absolute inset-0 transition-all duration-500"
+
+>
 
               <img
                 src={step.image}
@@ -420,10 +405,7 @@ function TemplateProcessSection() {
                 {step.label}
               </div>
 
-              <div
-                key={`title-${activeStep}`}
-                className="animate-[slideUp_0.45s_ease-out]"
-              >
+              <div className="transition-all duration-500">
 
                 <h3 className="text-[54px] leading-[1.05] font-black tracking-tight text-zinc-950 mb-7">
                   {step.title}

@@ -14,26 +14,53 @@ export default function AIHubLandingPage() {
   const [loading, setLoading] = useState(false)
   const [showSummary, setShowSummary] = useState(false)
   const [finderStarted, setFinderStarted] = useState(false)
+  const [questionSettled, setQuestionSettled] = useState(false)
+  const [moveQuestion, setMoveQuestion] = useState(false)
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const questions = [
     {
       question:
         '만약 한 가지 능력을 가질 수 있다면?',
       options: [
-        '🔍 무엇이든 바로 찾는 능력',
-        '💡 아이디어가 끊이지 않는 능력',
-        '⏰ 시간을 두 배로 활용하는 능력',
-        '😊 누구와도 즐겁게 대화하는 능력'
-      ]
+      {
+        text: '무엇이든 바로 찾는 능력',
+        image: '/persona/1-1.png',
+      },
+      {
+        text: '아이디어가 끊이지 않는 능력',
+        image: '/persona/1-2.png',
+      },
+      {
+        text: '시간을 두 배로 활용하는 능력',
+        image: '/persona/1-3.png',
+      },
+      {
+        text: '누구와도 즐겁게 대화하는 능력',
+        image: '/persona/1-4.png',
+      },
+    ],
     },
 
     {
       question:
         '당신만의 AI 조력자가 생긴다면?',
       options: [
-        '📚 무엇이든 알려주는 안내자',
-        '🎯 목표를 챙겨주는 매니저',
-        '🎨 영감을 주는 크리에이터',
-        '🤝 언제든 이야기할 수 있는 친구'
+        {
+        text: '무엇이든 알려주는 안내자',
+        image: '/persona/2-1.png',
+        },
+        {
+        text: '목표를 챙겨주는 매니저',
+        image: '/persona/2-2.png',
+       },
+       {
+        text: '영감을 주는 크리에이터',
+        image: '/persona/2-3.png',
+        },
+        {
+        text: '언제든 이야기할 수 있는 친구',
+        image: '/persona/2-4.png',
+        },
       ]
     },
 
@@ -41,10 +68,22 @@ export default function AIHubLandingPage() {
       question:
         '새로운 세상을 탐험하게 된다면?',
       options: [
-        '🗺️ 구석구석 둘러본다',
-        '🔬 새로운 것을 배운다',
-        '👥 사람들을 만난다',
-        '🚀 바로 도전한다'
+        {
+        text: '구석구석 둘러본다',
+        image: '/persona/3-1.png',
+        },
+        {
+        text: '새로운 것을 배운다',
+        image: '/persona/3-2.png',
+       },
+       {
+        text: '사람들을 만난다',
+        image: '/persona/3-3.png',
+        },
+        {
+        text: '바로 도전한다',
+        image: '/persona/3-4.png',
+        },
       ]
     },
 
@@ -52,10 +91,22 @@ export default function AIHubLandingPage() {
       question:
         '당신을 가장 설레게 하는 순간은?',
       options: [
-        '✨ 새로운 발견',
-        '🎯 목표 달성',
-        '🌱 성장',
-        '😊 좋은 사람과의 만남'
+        {
+        text: '새로운 발견',
+        image: '/persona/4-1.png',
+        },
+        {
+        text: '목표 달성',
+        image: '/persona/4-2.png',
+       },
+       {
+        text: '성장',
+        image: '/persona/4-3.png',
+        },
+        {
+        text: '좋은 사람과의 만남',
+        image: '/persona/4-4.png',
+        },
       ]
     }
   ]
@@ -75,6 +126,7 @@ export default function AIHubLandingPage() {
 
   const handleSelect = (option: string) => {
     if (submitting) return
+    setSelectedOption(option)
     setSubmitting(true)
     setMessages(prev => [
       ...prev,
@@ -143,10 +195,37 @@ export default function AIHubLandingPage() {
 
 
   useEffect(() => {
-
     window.scrollTo(0, 0)
-
   }, [])
+
+
+  useEffect(() => {
+
+  if (!finderStarted || completed) return
+
+  setQuestionSettled(false)
+  setMoveQuestion(false)
+  setSelectedOption(null)
+
+  // 1.2초 동안 큰 글자로 그대로 보여줌
+  const t1 = setTimeout(() => {
+    setMoveQuestion(true)
+  }, 1800)
+
+  // 질문이 올라간 후 선택지 등장
+  const t2 = setTimeout(() => {
+    setQuestionSettled(true)
+  }, 2800)
+
+  return () => {
+    clearTimeout(t1)
+    clearTimeout(t2)
+  }
+
+}, [finderStarted, completed, step])
+
+  
+  
 
 
   return (
@@ -232,16 +311,19 @@ export default function AIHubLandingPage() {
                   <div className="text-sm font-bold tracking-[0.22em] text-violet-500 mb-6">
                     PERSONA FINDER
                   </div>
+
                   <h2 className="text-[64px] font-black tracking-tight text-zinc-900 leading-tight mb-8">
                     당신에게 어울리는
                     <br />
                     AI 경험을 찾아보세요
                   </h2>
+
                   <p className="text-zinc-500 text-[22px] leading-relaxed mb-12">
                     카나나와 짧은 대화를 나누며
                     <br />
                     당신의 취향과 성향을 발견해보세요
                   </p>
+
                   <button
                     onClick={() => setFinderStarted(true)}
                     className="
@@ -267,53 +349,193 @@ export default function AIHubLandingPage() {
               {finderStarted && !completed && (
                 <motion.div
                   key={currentQuestion}
-                  initial={{ opacity: 0, x: 180, scale: 0.96 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -180, rotate: -3, scale: 0.96 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-center w-full"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="relative w-full h-full flex items-center justify-center"
                 >
-                  <div
+                  <motion.div
+                    initial={{ scale: 1.22, y: 0 }}
+                    animate={{
+                      scale: moveQuestion ? 0.58 : 1.22,
+                      y: moveQuestion ? -320 : 0,
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                     className="
-                      text-[58px]
+                      absolute
+                      text-center
+                      text-[64px]
                       font-black
                       leading-[1.15]
                       tracking-tight
                       text-zinc-900
-                      mb-14
+                      whitespace-pre-line
                     "
                   >
-                    {currentQuestion}
-                  </div>
-                  <div className="flex flex-col items-center gap-5">
-                    {questions[step].options.map(option => (
-                      <button
-                        key={option}
-                        onClick={() => handleSelect(option)}
-                        disabled={submitting}
+                    {currentQuestion.split(' ').map((word, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{
+                          opacity: 0,
+                          y: 18,
+                          filter: 'blur(8px)',
+                        }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          filter: 'blur(0px)',
+                        }}
+                        transition={{
+                          delay: index * 0.12,
+                          duration: 0.35,
+                        }}
+                        className="inline-block mr-3"
+                      >
+                        {word}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+
+                  <AnimatePresence>
+                    {questionSettled && (
+                      <motion.div
+                        key={`options-${step}`}
+                        initial={{ opacity: 0, y: 90, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 70, scale: 1 }}
+                        exit={{ opacity: 0, y: 110, scale: 0.96 }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
                         className="
-                          pointer-events-auto
-                          w-[760px]
-                          px-8
-                          py-6
-                          rounded-full
-                          bg-white/90
-                          border
-                          border-violet-100
-                          text-[22px]
-                          text-zinc-900
-                          shadow-sm
-                          hover:border-violet-400
-                          hover:shadow-[0_18px_60px_rgba(124,58,237,0.12)]
-                          hover:scale-[1.02]
-                          disabled:opacity-60
-                          transition-all
+                          grid
+                          grid-cols-2
+                          gap-6
+                          w-full
+                          max-w-[1180px]
+                          mx-auto
                         "
                       >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
+                        {questions[step].options.map((option, index) => {
+                          const optionText =
+                            typeof option === 'string' ? option : option.text
+
+                          const optionImage =
+                            typeof option === 'string' ? null : option.image
+
+                          const isSelected = selectedOption === optionText
+
+                          return (
+                            <motion.button
+                              key={index}
+                                initial={{
+                                opacity: 0,
+                                y: 40,
+                                scale: 0.94,
+                              }}
+                              animate={{
+                                opacity: 1,
+                                y: 0,
+                                scale: 1,
+                              }}
+                              transition={{
+                                delay: index * 0.12,
+                                duration: 0.45,
+                                ease: 'easeOut',
+                              }}
+                              onClick={() => handleSelect(optionText)}
+                              disabled={submitting}
+                              className={`
+                                group
+                                pointer-events-auto
+                                relative
+                                h-[320px]
+                                overflow-hidden
+                                rounded-[30px]
+                                bg-zinc-900
+                                text-left
+                                shadow-[0_18px_60px_rgba(0,0,0,0.12)]
+                                transition-all
+                                duration-300
+                                hover:scale-[1.04]
+                                hover:shadow-[0_26px_90px_rgba(124,58,237,0.22)]
+                                disabled:cursor-default
+                                ${isSelected
+                                  ? 'ring-4 ring-violet-500 scale-[1.03]'
+                                  : 'ring-1 ring-black/5'
+                                }
+                              `}
+                            >
+                              {optionImage ? (
+                                <img
+                                  src={optionImage}
+                                  alt={optionText}
+                                  className="
+                                    absolute
+                                    inset-0
+                                    w-full
+                                    h-full
+                                    object-cover
+                                    transition
+                                    duration-700
+                                    group-hover:scale-[1.06]
+                                  "
+                                />
+                              ) : (
+                                <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-fuchsia-500" />
+                              )}
+
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/28 to-transparent" />
+
+                              <div
+                                className="
+                                  absolute
+                                  left-7
+                                  bottom-7
+                                  right-7
+                                  z-10
+                                  text-white
+                                  text-[27px]
+                                  font-black
+                                  leading-tight
+                                  drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]
+                                "
+                              >
+                                {optionText}
+                              </div>
+
+                              {isSelected && (
+                                <motion.div
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  className="
+                                    absolute
+                                    right-6
+                                    top-6
+                                    z-20
+                                    w-14
+                                    h-14
+                                    rounded-full
+                                    bg-violet-600
+                                    text-white
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-3xl
+                                    font-black
+                                    shadow-[0_16px_40px_rgba(124,58,237,0.45)]
+                                  "
+                                >
+                                  ✓
+                                </motion.div>
+                              )}
+                            </motion.button>
+                          )
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               )}
               {completed && (
@@ -488,89 +710,105 @@ export default function AIHubLandingPage() {
                 </p>
               </div>
 
-              <motion.div
-
-                initial={{
-
-                  opacity: 0,
-
-                  y: 24,
-
-                  scale: 0.94
-
-                }}
-
-                whileInView={{
-
-                  opacity: 1,
-
-                  y: 0,
-
-                  scale: 1
-
-                }}
-
-                viewport={{
-
-                  once: true,
-
-                  amount: 0.4
-
-                }}
-
-                transition={{
-
-                  delay: 1.0,
-
-                  duration: 0.55,
-
-                  ease: 'easeOut'
-
-                }}
-
+              {/* AI ASSIST CARD - DOT EXPANDS TO RIGHT */}
+              <div
                 className="
-
                   absolute
-
                   left-12
-
                   bottom-12
-
                   z-10
-
-                  rounded-[28px]
-
-                  bg-white/85
-
-                  backdrop-blur-xl
-
-                  border
-
-                  border-white/70
-
-                  px-7
-
-                  py-5
-
-                  shadow-[0_24px_70px_rgba(124,58,237,0.16)]
-
+                  w-[330px]
+                  h-[110px]
+                  pointer-events-none
                 "
-
               >
+                {/* 점에서 오른쪽으로 자라는 카드 */}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    scaleX: 0,
+                    scaleY: 0.28,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scaleX: 1,
+                    scaleY: 1,
+                  }}
+                  transition={{
+                    delay: 1.0,
+                    duration: 0.75,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  style={{
+                    transformOrigin: 'left bottom',
+                  }}
+                  className="
+                    absolute
+                    left-0
+                    bottom-0
+                    w-[310px]
+                    h-[96px]
+                    rounded-[28px]
+                    bg-white/88
+                    backdrop-blur-xl
+                    border
+                    border-white/70
+                    shadow-[0_24px_70px_rgba(124,58,237,0.16),0_0_34px_rgba(168,85,247,0.16)]
+                    overflow-hidden
+                  "
+                >
+                  {/* 빛이 한번 지나감 */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -80 }}
+                    whileInView={{ opacity: [0, 0.75, 0], x: 320 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 1.72,
+                      duration: 0.85,
+                      ease: 'easeOut',
+                    }}
+                    className="
+                      absolute
+                      top-0
+                      bottom-0
+                      borderRadius: 28,
+                      w-20
+                      bg-gradient-to-r
+                      from-transparent
+                      via-white/70
+                      to-transparent
+                      blur-sm
+                    "
+                  />
 
-                <div className="text-xs font-bold text-violet-500 mb-2">
+                  {/* 텍스트 */}
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      y: 10,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: 2.15,
+                      duration: 0.35,
+                      ease: 'easeOut',
+                    }}
+                    className="relative z-10 px-7 py-5"
+                  >
+                    <div className="text-xs font-bold text-violet-500 mb-2">
+                      카나나가 도와줄게요
+                    </div>
 
-                  카나나가 도와줄게요
-
-                </div>
-
-                <div className="text-zinc-900 font-semibold">
-
-                  정보 탐색 · 장소 추천 · 일정 제안
-
-                </div>
-
-              </motion.div>
+                    <div className="text-zinc-900 font-semibold">
+                      정보 탐색 · 장소 추천 · 일정 제안
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </div>
               <div
                 className="
                   absolute
@@ -783,8 +1021,24 @@ export default function AIHubLandingPage() {
                   </div>
 
                   {/* FEATURE CARD */}
-                  <div
-                    className="
+                  <motion.div
+                  initial={{ scale: 1 }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    boxShadow: [
+                      '0 1px 3px rgba(0,0,0,0.08)',
+                      '0 24px 70px rgba(124,58,237,0.18)',
+                      '0 1px 3px rgba(0,0,0,0.08)',
+                    ],
+                  }}
+                  transition={{
+                    delay: index * 0.35,
+                    duration: 0.7,
+                    ease: 'easeInOut',
+                    repeat: Infinity,
+                    repeatDelay: 2.2,
+                  }}
+                  className="
                     w-full
                     rounded-[26px]
                     border
@@ -793,12 +1047,12 @@ export default function AIHubLandingPage() {
                     p-5
                     shadow-sm
                     min-h-[180px]
+                    hover:scale-[1.2]
+                    hover:shadow-[0_20px_60px_rgba(124,58,237,0.12)]
                     transition-all
                     duration-300
-                    hover:scale-[1.3]
-                    hover:shadow-[0_20px_60px_rgba(124,58,237,0.12)]
                   "
-                  >
+                >
 
                     {/* TOP */}
                     <div className="flex items-center gap-3 mb-5">
@@ -835,7 +1089,7 @@ export default function AIHubLandingPage() {
                     >
                       {item.featureDesc}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               ))}
             </div>

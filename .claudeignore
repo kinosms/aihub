@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+.vercel/
+.git/
+
+*.mp3
+*.mp4
+*.webp
+*.png
+*.jpg
+*.jpeg

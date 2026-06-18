@@ -17,6 +17,7 @@ export default function AIHubLandingPage() {
   const [questionSettled, setQuestionSettled] = useState(false)
   const [moveQuestion, setMoveQuestion] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [optionsReady, setOptionsReady] = useState(false)
   const questions = [
     {
       question:
@@ -199,30 +200,49 @@ export default function AIHubLandingPage() {
   }, [])
 
 
+
+
+
+
+
   useEffect(() => {
+    if (!finderStarted || completed) return
 
-  if (!finderStarted || completed) return
+    setQuestionSettled(false)
+    setMoveQuestion(false)
+    setSelectedOption(null)
+    setOptionsReady(false)
 
-  setQuestionSettled(false)
-  setMoveQuestion(false)
-  setSelectedOption(null)
+    const imageUrls = questions[step].options
+      .filter(option => typeof option !== 'string' && option.image)
+      .map(option => option.image)
 
-  // 1.2초 동안 큰 글자로 그대로 보여줌
-  const t1 = setTimeout(() => {
-    setMoveQuestion(true)
-  }, 1800)
+    Promise.all(
+      imageUrls.map(src => {
+        return new Promise(resolve => {
+          const img = new Image()
+          img.src = src
+          img.onload = resolve
+          img.onerror = resolve
+        })
+      })
+    ).then(() => {
+      setOptionsReady(true)
+    })
 
-  // 질문이 올라간 후 선택지 등장
-  const t2 = setTimeout(() => {
-    setQuestionSettled(true)
-  }, 2800)
+    const t1 = setTimeout(() => {
+      setMoveQuestion(true)
+    }, 1800)
 
-  return () => {
-    clearTimeout(t1)
-    clearTimeout(t2)
-  }
+    const t2 = setTimeout(() => {
+      setQuestionSettled(true)
+    }, 2800)
 
-}, [finderStarted, completed, step])
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
+  }, [finderStarted, completed, step])
 
   
   
@@ -401,7 +421,7 @@ export default function AIHubLandingPage() {
                   </motion.div>
 
                   <AnimatePresence>
-                    {questionSettled && (
+                    {questionSettled && optionsReady && (
                       <motion.div
                         key={`options-${step}`}
                         initial={{ opacity: 0, y: 90, scale: 0.95 }}
